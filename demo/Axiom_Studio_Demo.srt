@@ -1,87 +1,167 @@
 1
-00:00:00,200 --> 00:00:07,000
+00:00:00,200 --> 00:00:03,600
 Every physics student has done this:
-memorize a formula, plug in numbers...
 
 2
-00:00:07,000 --> 00:00:12,760
-...and get an answer you don't actually understand.
+00:00:03,600 --> 00:00:07,000
+memorize a formula, plug in numbers…
 
 3
-00:00:12,760 --> 00:00:18,860
-Real labs are expensive — most of us never touch one.
+00:00:07,000 --> 00:00:09,600
+…and get an answer
 
 4
-00:00:18,860 --> 00:00:26,240
-So we built a physics lab that lives in your browser.
-Axiom Studio — physics you can actually touch.
+00:00:09,600 --> 00:00:12,760
+you don't actually understand.
 
 5
-00:00:26,240 --> 00:00:31,720
-Any browser becomes a real physics lab.
-No account, no setup — just open it.
+00:00:12,760 --> 00:00:15,700
+Real labs are expensive —
 
 6
-00:00:31,720 --> 00:00:42,920
-Under the hood: real physics engines,
-RK4 integration, true orbital mechanics.
+00:00:15,700 --> 00:00:18,860
+most of us never touch one.
 
 7
+00:00:18,860 --> 00:00:21,200
+So we built a physics lab
+
+8
+00:00:21,200 --> 00:00:23,200
+that lives in your browser.
+
+9
+00:00:23,200 --> 00:00:26,240
+Physics you can actually touch.
+
+10
+00:00:26,240 --> 00:00:29,000
+Any browser, a real physics lab.
+
+11
+00:00:29,000 --> 00:00:31,720
+No account, no setup.
+
+12
+00:00:31,720 --> 00:00:35,200
+Under the hood:
+
+13
+00:00:35,200 --> 00:00:38,800
+real physics engines,
+
+14
+00:00:38,800 --> 00:00:40,900
+RK4 integration,
+
+15
+00:00:40,900 --> 00:00:42,920
+true orbital mechanics.
+
+16
 00:00:42,920 --> 00:00:45,000
 Not fake animations — the real deal.
 
-8
-00:00:45,000 --> 00:00:50,500
-Here's what makes it different. Every experiment
-follows three steps. First: predict.
+17
+00:00:45,000 --> 00:00:47,300
+Here's what makes it different.
 
-9
-00:00:50,500 --> 00:00:57,000
-Before anything runs, I commit to an answer.
-Will this projectile land here, or here?
+18
+00:00:47,300 --> 00:00:50,500
+First: predict.
 
-10
-00:00:57,000 --> 00:01:09,000
-Then: experiment. Adjust the parameters —
-angle, velocity — and run the real simulation.
+19
+00:00:50,500 --> 00:00:54,300
+Commit to an answer before it runs.
 
-11
-00:01:09,000 --> 00:01:16,500
+20
+00:00:54,300 --> 00:00:57,000
+Will it land here, or here?
+
+21
+00:00:57,000 --> 00:01:00,500
+Then: experiment.
+
+22
+00:01:00,500 --> 00:01:04,500
+Adjust the parameters —
+
+23
+00:01:04,500 --> 00:01:06,800
+angle, velocity —
+
+24
+00:01:06,800 --> 00:01:09,000
+run the real simulation.
+
+25
+00:01:09,000 --> 00:01:12,000
 And finally: understand.
+
+26
+00:01:12,000 --> 00:01:16,500
 Meet Axion, our AI tutor.
 
-12
-00:01:16,500 --> 00:01:31,440
-It doesn't give a generic textbook answer — it reads
-your numbers and prediction, and explains exactly why.
+27
+00:01:16,500 --> 00:01:20,000
+Not a generic textbook answer —
 
-13
+28
+00:01:20,000 --> 00:01:24,000
+it reads your numbers
+
+29
+00:01:24,000 --> 00:01:27,500
+and your prediction,
+
+30
+00:01:27,500 --> 00:01:31,440
+and explains exactly why.
+
+31
 00:01:31,440 --> 00:01:33,640
 Projectile motion is just the start.
 
-14
-00:01:33,640 --> 00:01:39,560
-Pendulum dynamics for harmonic motion.
-Collision physics for conservation laws.
+32
+00:01:33,640 --> 00:01:36,600
+Pendulum — harmonic motion.
 
-15
-00:01:39,560 --> 00:01:46,000
-And my favorite — orbital mechanics, in full 3D.
+33
+00:01:36,600 --> 00:01:39,560
+Collisions — conservation laws.
 
-16
-00:01:50,000 --> 00:01:53,000
-Same loop every time: predict, experiment, understand.
+34
+00:01:39,560 --> 00:01:42,800
+And my favorite —
 
-17
-00:01:53,000 --> 00:01:59,000
-That's how real intuition gets built — accessible
-to anyone with a browser.
+35
+00:01:42,800 --> 00:01:46,000
+orbital mechanics, in full 3D.
 
-18
-00:01:59,000 --> 00:02:04,000
-For free. Built for DHS Hacks — live now at
-axiom-studio20.vercel.app.
+36
+00:01:50,000 --> 00:01:51,600
+Same loop every time:
 
-19
-00:02:04,000 --> 00:02:10,000
+37
+00:01:51,600 --> 00:01:53,000
+predict, experiment, understand.
+
+38
+00:01:53,000 --> 00:01:56,000
+That's how real intuition gets built —
+
+39
+00:01:56,000 --> 00:01:59,000
+accessible to anyone with a browser.
+
+40
+00:01:59,000 --> 00:02:01,400
+For free. Built for DHS Hacks.
+
+41
+00:02:01,400 --> 00:02:04,000
+Live at axiom-studio20.vercel.app
+
+42
+00:02:04,000 --> 00:02:07,200
 Thanks for watching.
