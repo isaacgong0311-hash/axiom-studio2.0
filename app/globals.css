@@ -1,0 +1,160 @@
+@import "tailwindcss";
+
+/* ── Axiom Studio design tokens ─────────────────────────────── */
+:root {
+  --bg-deep:    #0d0d12;
+  --bg-surface: #131318;
+  --bg-muted:   #1a1a24;
+  --border:     #27273a;
+  --accent:     #6d6af8;
+  --accent-glow:#6d6af840;
+  --cyan:       #22d3ee;
+  --text:       #e8e9f3;
+  --text-muted: #7b7fa8;
+}
+
+@theme inline {
+  --color-background: var(--bg-deep);
+  --color-foreground:  var(--text);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* ── Base ────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a54; }
+
+/* ── Page entrance animation ─────────────────────────────────── */
+@keyframes axiom-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.axiom-page {
+  animation: axiom-fade-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Slide-in for toast ──────────────────────────────────────── */
+@keyframes axiom-slide-in {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+.axiom-toast { animation: axiom-slide-in 0.28s cubic-bezier(0.16, 1, 0.3, 1); }
+
+/* ── Panel expand ────────────────────────────────────────────── */
+@keyframes axiom-expand {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.axiom-expand {
+  animation: axiom-expand 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ── Axion typing dots ───────────────────────────────────────── */
+@keyframes axiom-dot {
+  0%, 80%, 100% { transform: translateY(0);    opacity: 0.35; }
+  40%           { transform: translateY(-4px); opacity: 1;    }
+}
+.axiom-dots { display: inline-flex; align-items: center; gap: 4px; padding: 1px 0; }
+.axiom-dots span {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--text-muted);
+  animation: axiom-dot 1.3s ease-in-out infinite;
+}
+.axiom-dots span:nth-child(2) { animation-delay: 0.18s; }
+.axiom-dots span:nth-child(3) { animation-delay: 0.36s; }
+
+/* ── Focus rings ─────────────────────────────────────────────── */
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  outline: none;
+  border-color: rgba(109, 106, 248, 0.55) !important;
+  box-shadow: 0 0 0 2.5px rgba(109, 106, 248, 0.18);
+}
+
+/* ── Input base transitions ──────────────────────────────────── */
+input[type="text"],
+input[type="number"],
+textarea {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* ── Range slider refinement ─────────────────────────────────── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]:disabled { cursor: not-allowed; opacity: 0.4; }
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-muted);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: -6px;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+input[type="range"]:not(:disabled)::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 0 4px rgba(109, 106, 248, 0.18);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 16px; height: 16px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--bg-muted);
+}
+
+/* ── Hub cards ───────────────────────────────────────────────── */
+.hub-card {
+  transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.hub-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 1px var(--accent-glow), 0 12px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Sim tab bar ─────────────────────────────────────────────── */
+.sim-tab {
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+.sim-tab:not(:disabled):hover {
+  color: var(--text) !important;
+}
+
+/* ── Utility: hide scrollbar but keep scroll ─────────────────── */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
