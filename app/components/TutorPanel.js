@@ -354,7 +354,7 @@ export default function TutorPanel({ simId, simState, hasResult, rawState }) {
       const data = await res.json();
       if (!res.ok) {
         const msg = data.error === 'missing_key'
-          ? `Axion is offline — ANTHROPIC_API_KEY not found. Add it to .env.local and restart the server.`
+          ? `Axion is offline — GROQ_API_KEY not found. Add it to your environment and restart the server.`
           : `Something went wrong (${data.message ?? 'unknown error'}). Try again in a moment.`;
         setMessages((prev) => [...prev, { role: 'assistant', content: msg, error: true, actions: [] }]);
       } else {

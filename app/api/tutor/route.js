@@ -1,5 +1,5 @@
-// Server-side only. ANTHROPIC_API_KEY is never sent to the browser.
-const MODEL = 'claude-sonnet-4-6';
+// Server-side only. GROQ_API_KEY is never sent to the browser.
+const MODEL = 'llama-3.3-70b-versatile';
 
 const SIM_NAMES = {
   projectile: 'Projectile Motion',
@@ -79,9 +79,9 @@ Response rules:
 }
 
 export async function POST(request) {
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!process.env.GROQ_API_KEY) {
     return Response.json(
-      { error: 'missing_key', message: 'ANTHROPIC_API_KEY is not set in .env.local' },
+      { error: 'missing_key', message: 'GROQ_API_KEY is not set' },
       { status: 500 },
     );
   }
@@ -102,18 +102,19 @@ export async function POST(request) {
   const systemPrompt = buildSystemPrompt(simState, prediction);
 
   try {
-    const upstream = await fetch('https://api.anthropic.com/v1/messages', {
+    const upstream = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
-        'x-api-key':        process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
-        'content-type':      'application/json',
+        'authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'content-type':  'application/json',
       },
       body: JSON.stringify({
         model:      MODEL,
         max_tokens: 400,
-        system:     systemPrompt,
-        messages:   messages.map((m) => ({ role: m.role, content: m.content })),
+        messages: [
+          { role: 'system', content: systemPrompt },
+          ...messages.map((m) => ({ role: m.role, content: m.content })),
+        ],
       }),
     });
 
@@ -126,7 +127,7 @@ export async function POST(request) {
     }
 
     const data  = await upstream.json();
-    const reply = data.content?.[0]?.text ?? '';
+    const reply = data.choices?.[0]?.message?.content ?? '';
     return Response.json({ reply });
 
   } catch (err) {
