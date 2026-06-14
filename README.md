@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Axiom Studio
 
-## Getting Started
+> **Physics you can actually touch.**
 
-First, run the development server:
+Axiom Studio turns any browser into a real physics lab — no account, no setup, free. Every experiment follows one loop: **Predict → Experiment → Understand**, with an AI tutor (**Axion**) that reads your own numbers and explains exactly why what happened, happened.
+
+🚀 **Live:** https://axiom-studio20.vercel.app
+🏆 Built for **DHS Hacks**
+
+## The four modules
+
+- **Projectile Motion** — kinematics; find the angle that outranges them all.
+- **Pendulum** — harmonic motion; the period cares about length, not swing angle.
+- **Collisions** — conservation laws; momentum survives, kinetic energy may not.
+- **Orbital Mechanics (3D)** — gravitation; the razor line between orbit, crash, and escape.
+
+The simulations run genuine physics engines with **4th-order Runge–Kutta (RK4)** integration — not canned animations — so the readouts stay trustworthy and Axion's explanations stay honest.
+
+## Demo
+
+A 2:10 walkthrough video plus submission write-ups live in [`demo/`](demo):
+
+- [`Axiom_Studio_Demo.mp4`](demo/Axiom_Studio_Demo.mp4) — 1080p demo video with voiceover + captions
+- [`ABOUT.md`](demo/ABOUT.md) — full write-up (inspiration, build, challenges, learnings)
+- [`DEMO_SCRIPT.md`](demo/DEMO_SCRIPT.md) — narration script with timestamps
+- [`YOUTUBE_DESCRIPTION.md`](demo/YOUTUBE_DESCRIPTION.md) · [`TAGLINES.md`](demo/TAGLINES.md)
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### Environment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The Axion AI tutor uses the Groq API. Create a `.env.local` with:
 
-## Learn More
+```bash
+GROQ_API_KEY=your_key_here
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Tech stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Next.js** (App Router) + React
+- **RK4 integration** for stable, accurate physics
+- **Groq API** powering the Axion tutor
+- Deployed on **Vercel**
