@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { calcReadouts, positionAt, velocityAt, trajectoryPoints } from './physics';
+import { paintBackdrop, spawnBurst, stepBurst } from '../canvasFx';
 import TutorPanel from '../../components/TutorPanel';
 import { useSimChallenges } from '../../hooks/useSimChallenges';
 import { useScenario } from '../../contexts/ScenarioContext';
@@ -353,8 +354,7 @@ export default function ProjectileSim() {
 
     // ── Master frame ──────────────────────────────────────
     function drawFrame(t) {
-      ctx.fillStyle = '#131318';
-      ctx.fillRect(0, 0, CW, CH);
+      paintBackdrop(ctx, CW, CH, { glowY: CH * 0.5 });
       drawGrid();
       drawGround();
       drawLandingMarker();
@@ -373,25 +373,41 @@ export default function ProjectileSim() {
 
     // ── Animation loop ────────────────────────────────────
     let simTime = 0, lastTs = null, rafId;
+    const sparks = [];
+    let landed = false;
 
     function step(ts) {
       if (!lastTs) lastTs = ts;
-      const dt = Math.min((ts - lastTs) / 1000, 0.05) * ANIM_SPEED;
+      const realDt = Math.min((ts - lastTs) / 1000, 0.05);
+      const dt = realDt * ANIM_SPEED;
       lastTs = ts;
       simTime += dt;
 
       drawFrame(Math.min(simTime, T));
 
-      if (simTime < T) {
-        rafId = requestAnimationFrame(step);
-      } else {
-        // Animation complete — evaluate target hit
+      // On the first frame past landing: dust kick + evaluate target
+      if (!landed && simTime >= T) {
+        landed = true;
+        const land = tc(range, 0);
+        if (land.cx > PAD_L && land.cx < CW - PAD_R) {
+          spawnBurst(sparks, land.cx, groundY, {
+            color: '#c4c2ff', count: 22, speed: 150,
+            dir: -Math.PI / 2, spread: Math.PI * 0.85,
+          });
+        }
         if (targetModeRef.current && targetXRef.current !== null) {
           const tol = Math.max(2.5, targetXRef.current * 0.03);
           const err = Math.abs(range - targetXRef.current);
           setLandingError(err);
           setHitResult(err <= tol ? 'hit' : 'miss');
         }
+      }
+
+      stepBurst(ctx, sparks, realDt);
+
+      // Keep running while in flight or while sparks linger
+      if (simTime < T || sparks.length > 0) {
+        rafId = requestAnimationFrame(step);
       }
     }
 

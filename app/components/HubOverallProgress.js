@@ -4,15 +4,13 @@ import { useProgress } from '../contexts/ProgressContext';
 import { CHALLENGES } from '../sims/challenges';
 
 export default function HubOverallProgress() {
-  const { completed, predStats } = useProgress();
+  const { completed } = useProgress();
   const total = CHALLENGES.length;
   const done  = CHALLENGES.filter((c) => completed.has(c.id)).length;
 
   if (done === 0) return null;
 
   const pct = Math.round((done / total) * 100);
-  const showPred = predStats.total >= 3;
-  const predPct  = showPred ? Math.round((predStats.correct / predStats.total) * 100) : null;
 
   return (
     <div
@@ -37,16 +35,6 @@ export default function HubOverallProgress() {
           />
         </div>
       </div>
-
-      {/* Prediction accuracy stat */}
-      {showPred && (
-        <div className="text-xs text-center sm:text-right flex-shrink-0" style={{ color: 'var(--text-muted)' }}>
-          <span>Prediction accuracy </span>
-          <span className="font-mono font-semibold" style={{ color: predPct >= 70 ? '#4ade80' : '#fbbf24' }}>
-            {predPct}%
-          </span>
-        </div>
-      )}
     </div>
   );
 }

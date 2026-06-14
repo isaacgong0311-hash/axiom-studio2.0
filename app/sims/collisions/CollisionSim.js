@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { postCollisionVelocities, kineticEnergy, ballRadius } from './physics';
+import { paintBackdrop, spawnBurst, stepBurst } from '../canvasFx';
 import TutorPanel from '../../components/TutorPanel';
 import { useSimChallenges } from '../../hooks/useSimChallenges';
 import { useScenario } from '../../contexts/ScenarioContext';
@@ -69,8 +70,7 @@ function paintFrame(ctx, {
   flash,           // { alpha, cx } or null
 }) {
   // Background
-  ctx.fillStyle = '#131318';
-  ctx.fillRect(0, 0, CW, CH);
+  paintBackdrop(ctx, CW, CH, { glowY: TRACK_Y });
 
   // Grid
   ctx.strokeStyle = 'rgba(255,255,255,0.03)'; ctx.lineWidth = 1;
@@ -233,6 +233,7 @@ export default function CollisionSim() {
     let curV1 = vel1, curV2 = vel2;
     let hasCollided = false;
     let flash = null;
+    const sparks = [];
     let lastTs = null, rafId;
 
     function step(ts) {
@@ -258,7 +259,15 @@ export default function CollisionSim() {
         curV1 = v1new;
         curV2 = v2new;
         hasCollided = true;
-        flash = { alpha: 0.85, cx: toCanvasX((physX1 + physX2) / 2) };
+        const impactX = toCanvasX((physX1 + physX2) / 2);
+        flash = { alpha: 0.85, cx: impactX };
+        // Spark burst — more energetic the harder the hit
+        const impactSpeed = Math.abs(curV1 - curV2) || Math.abs(v1new - v2new);
+        spawnBurst(sparks, impactX, TRACK_Y, {
+          color: '#ffd27a',
+          count: Math.round(14 + Math.min(26, impactSpeed * 2)),
+          speed: 90 + impactSpeed * 14,
+        });
         setAfterVels({ v1: v1new, v2: v2new });
       }
 
@@ -270,6 +279,8 @@ export default function CollisionSim() {
         r1, r2, v1: curV1, v2: curV2,
         mass1, mass2, flash,
       });
+
+      stepBurst(ctx, sparks, dt);
 
       rafId = requestAnimationFrame(step);
     }

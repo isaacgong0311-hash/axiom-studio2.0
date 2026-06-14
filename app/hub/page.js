@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import HubProgressBadge from '../components/HubProgressBadge';
 import HubOverallProgress from '../components/HubOverallProgress';
+import IntuitionMeter from '../components/IntuitionMeter';
 
 export const metadata = { title: 'Explore — Axiom Studio' };
 
@@ -164,6 +165,11 @@ export default function HubPage() {
               }}>→ Try orbital mechanics (3D)</Link>
             </div>
           </div>
+        </div>
+
+        {/* Physics Intuition meter — the signature predict-first mechanic */}
+        <div className="mb-5">
+          <IntuitionMeter />
         </div>
 
         {/* Overall progress (only visible once user has solved something) */}

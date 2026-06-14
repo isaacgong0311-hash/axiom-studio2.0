@@ -6,6 +6,7 @@ import TutorPanel from '../../components/TutorPanel';
 import { useSimChallenges } from '../../hooks/useSimChallenges';
 import { useScenario } from '../../contexts/ScenarioContext';
 import { SCENARIOS }   from '../scenarios';
+import { paintBackdrop } from '../canvasFx';
 
 // ── Canvas geometry ───────────────────────────────────────────
 const CW = 700, CH = 400;
@@ -64,8 +65,7 @@ function paintFrame(ctx, { theta, omega, length, startAngleDeg, trail, showVecto
   const startAngleRad = startAngleDeg * Math.PI / 180;
 
   // ── Background ──────────────────────────────────────────
-  ctx.fillStyle = '#131318';
-  ctx.fillRect(0, 0, CW, CH);
+  paintBackdrop(ctx, CW, CH, { glowX: PIVOT_X, glowY: PIVOT_Y + 120 });
 
   // ── Grid ────────────────────────────────────────────────
   ctx.strokeStyle = 'rgba(255,255,255,0.03)';
